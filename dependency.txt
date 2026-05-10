@@ -1,0 +1,2 @@
+Python 3.11.15
+mediapipe 0.10.9
