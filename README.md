@@ -1,4 +1,5 @@
-Hand Gesture Recognition System
+-HAND GESTURE RECOGNITION-
+
 Questo progetto implementa una pipeline completa per il riconoscimento dei gesti delle mani in tempo reale. Il sistema utilizza la visione artificiale per l'estrazione delle feature e il machine learning per la classificazione.
 
 - Architettura del Sistema
