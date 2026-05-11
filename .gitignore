@@ -1,3 +1,4 @@
 check_env.py
 data/
 venv/
+data.pickle
