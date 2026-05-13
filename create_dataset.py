@@ -20,8 +20,12 @@ data = []
 labels = []
 # scorre tutte le immagini di tutte le dir della directory data e le converte da BGR a RGB per poterle usare con mediapipe
 for dir_ in os.listdir(DATA_DIR):
+    
     for img_path in os.listdir(os.path.join(DATA_DIR, dir_)):
         data_aux = []
+        x_tmp = []
+        y_tmp = []
+
         img = cv2.imread(os.path.join(DATA_DIR, dir_, img_path))
         img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
@@ -30,12 +34,22 @@ for dir_ in os.listdir(DATA_DIR):
 
         # crea un array di landmarks trovati
         if results.multi_hand_landmarks:
-            for hand_landmarks in results.multi_hand_landmarks:
-                for i in range(len(hand_landmarks.landmark)):
-                    x = hand_landmarks.landmark[i].x
-                    y = hand_landmarks.landmark[i].y
-                    data_aux.append(x)
-                    data_aux.append(y)
+            # Prende solo la prima mano rilevata
+            hand_landmarks = results.multi_hand_landmarks[0]
+            
+            # 1. Raccogliamo tutte le coordinate X e Y per trovare il minimo
+            for i in range(len(hand_landmarks.landmark)):
+                x = hand_landmarks.landmark[i].x
+                y = hand_landmarks.landmark[i].y
+                x_tmp.append(x)
+                y_tmp.append(y)
+
+            # 2. Sottraiamo il minimo per rendere le coordinate relative alla mano
+            for i in range(len(hand_landmarks.landmark)):
+                x = hand_landmarks.landmark[i].x
+                y = hand_landmarks.landmark[i].y
+                data_aux.append(x - min(x_tmp))
+                data_aux.append(y - min(y_tmp))
             
             # Crea una lista di array di landmarks che rappresentano le immagini
             data.append(data_aux)
@@ -45,3 +59,4 @@ for dir_ in os.listdir(DATA_DIR):
 with open('data.pickle', 'wb') as f:
     pickle.dump({'data': data, 'labels': labels}, f)
     f.close()
+print('Dataset creato.')
