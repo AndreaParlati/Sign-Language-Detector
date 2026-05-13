@@ -52,10 +52,6 @@ Permette il riconoscimento in tempo reale del simbolo.
 - Visualizzazione: Genera un bounding box dinamico attorno alla mano e visualizza l'etichetta predetta direttamente sul feed video.
 
 - Come Eseguire il Progetto
-Attiva ambiente virtuale
-  Bash
-  source venv/bin/activate
-  
 Raccogli le immagini:
   Bash
   python collect_data.py
