@@ -28,6 +28,6 @@ score = accuracy_score(y_predict, y_test)
 print('{}% sono stati classificati correttamente'.format(score *  100))
 
 # Salviamo il modello con un dictionary
-f = open('model.p', 'wb')
-pickle.dump({'model': model}, f)
-f.close()
+with open('model.p', 'wb') as f:
+    pickle.dump({'model': model}, f)
+    f.close()

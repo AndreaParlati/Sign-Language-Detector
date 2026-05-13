@@ -42,6 +42,6 @@ for dir_ in os.listdir(DATA_DIR):
             labels.append(dir_)        
 
 # Salva i dati creati
-f = open('data.pickle', 'wb')
-pickle.dump({'data': data, 'labels': labels}, f)
-f.close()
+with open('data.pickle', 'wb') as f:
+    pickle.dump({'data': data, 'labels': labels}, f)
+    f.close()

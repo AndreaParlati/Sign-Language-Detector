@@ -1,14 +1,16 @@
 import os
-
+import shutil
 import cv2
 
 # Setup della cartella data
 DATA_DIR = './data'
-if not os.path.exists(DATA_DIR):
-    os.makedirs(DATA_DIR)
+if os.path.exists(DATA_DIR):
+    shutil.rmtree(DATA_DIR)
+
+os.makedirs(DATA_DIR)
 
 number_of_classes = 3
-dataset_size = 50
+dataset_size = 100
 
 cap = cv2.VideoCapture(0)
 for j in range(number_of_classes):
