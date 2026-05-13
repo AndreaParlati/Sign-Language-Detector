@@ -45,7 +45,17 @@ Validazione: Calcola l'accuratezza confrontando le predizioni con i valori reali
 
 Export: Il modello finale viene salvato come model.p.
 
+4. Test Real-time (test_classifier.py)
+Permette il riconoscimento in tempo reale del simbolo.
+- Tracking Dinamico: Utilizza MediaPipe in static_image_mode=False per sfruttare la correlazione temporale tra i frame e rendere il tracciamento fluido.
+- Normalizzazione Relativa: Per rendere il sistema robusto alla posizione della mano, lo script trasforma le coordinate assolute in coordinate locali. Questo permette di riconoscere il gesto in qualsiasi punto dell'inquadratura.
+- Visualizzazione: Genera un bounding box dinamico attorno alla mano e visualizza l'etichetta predetta direttamente sul feed video.
+
 - Come Eseguire il Progetto
+Attiva ambiente virtuale
+  Bash
+  source venv/bin/activate
+  
 Raccogli le immagini:
   Bash
   python collect_data.py
@@ -58,6 +68,10 @@ Addestra l'intelligenza artificiale:
   Bash
   python train_classifier.py
 
+Testa il modello:
+  Bash
+  python test_classifier.py
+  
 - Note sulla Manutenzione e Debug
 Dimensione dei dati: Assicurati che durante la fase di creazione del dataset venga rilevata una sola mano per immagine. Se vengono rilevate più mani, la lunghezza del vettore data_aux varierà, causando errori nel classificatore Random Forest.
 
